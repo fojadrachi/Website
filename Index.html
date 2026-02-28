@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>fojadrachi.com — Services</title>
+  <meta name="description" content="Service-Übersicht für fojadrachi.com Subdomains." />
+
+  <style>
+    :root{
+      --bg0:#0b0f17;
+      --bg1:#0f1624;
+      --card:#121b2c;
+      --card2:#0e1524;
+      --text:#e7eefc;
+      --muted:#a6b3d1;
+      --line:rgba(255,255,255,.08);
+      --glow:rgba(120,160,255,.22);
+      --accent:#7aa2ff;
+      --accent2:#ff4fd8;
+      --good:#3ee6a8;
+      --warn:#ffcc66;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font: 500 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(122,162,255,.22), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(255,79,216,.18), transparent 55%),
+        radial-gradient(700px 450px at 50% 110%, rgba(62,230,168,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:48px 18px 64px;
+    }
+
+    header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:22px;
+    }
+
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.25), transparent 60%),
+        linear-gradient(135deg, rgba(122,162,255,1), rgba(255,79,216,1));
+      box-shadow: 0 12px 35px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.08) inset;
+      flex:0 0 auto;
+    }
+
+    h1{
+      margin:0;
+      font-size: clamp(20px, 3vw, 28px);
+      letter-spacing:.2px;
+    }
+    .sub{
+      margin-top:4px;
+      color:var(--muted);
+      font-weight:500;
+      font-size:14px;
+    }
+
+    .right{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .pill{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:10px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--muted);
+      backdrop-filter: blur(10px);
+      user-select:none;
+    }
+    .dot{
+      width:9px;height:9px;border-radius:999px;
+      background: var(--good);
+      box-shadow: 0 0 0 4px rgba(62,230,168,.10);
+    }
+
+    .search{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin:18px 0 22px;
+    }
+    .search input{
+      width:100%;
+      padding:14px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.25);
+      color:var(--text);
+      outline:none;
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    }
+    .search input::placeholder{color:rgba(166,179,209,.75)}
+    .btn{
+      padding:14px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      cursor:pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    }
+    .btn:hover{border-color:rgba(255,255,255,.16)}
+    .btn:active{transform: translateY(1px)}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+
+    .card{
+      grid-column: span 4;
+      position:relative;
+      border-radius:18px;
+      padding:16px 16px 14px;
+      background:
+        radial-gradient(600px 220px at 0% 0%, rgba(122,162,255,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.35),
+        0 0 0 1px rgba(0,0,0,.25) inset;
+      overflow:hidden;
+      transition: transform .18s ease, border-color .18s ease;
+      cursor:pointer;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.16);
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(500px 160px at 20% 0%, var(--glow), transparent 60%);
+      opacity:.25;
+      pointer-events:none;
+    }
+
+    .top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      position:relative;
+      z-index:1;
+    }
+
+    .name{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+    .desc{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      min-height: 34px;
+    }
+
+    .tag{
+      flex:0 0 auto;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color:rgba(231,238,252,.9);
+      background: rgba(0,0,0,.22);
+    }
+    .tag.panel{border-color: rgba(122,162,255,.25)}
+    .tag.game{border-color: rgba(255,79,216,.22)}
+    .tag.admin{border-color: rgba(62,230,168,.20)}
+    .tag.misc{border-color: rgba(255,204,102,.20)}
+
+    .linkrow{
+      margin-top:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      position:relative;
+      z-index:1;
+    }
+
+    .url{
+      color:rgba(231,238,252,.88);
+      font-size:13px;
+      text-decoration:none;
+      border-bottom: 1px dashed rgba(255,255,255,.15);
+      padding-bottom:1px;
+    }
+    .url:hover{border-bottom-color: rgba(255,255,255,.35)}
+
+    .go{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:12px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+    }
+    .go:hover{border-color: rgba(255,255,255,.16)}
+    .go svg{opacity:.9}
+
+    footer{
+      margin-top:26px;
+      color:rgba(166,179,209,.85);
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      border-top:1px solid var(--line);
+      padding-top:16px;
+    }
+
+    @media (max-width: 980px){
+      .card{grid-column: span 6;}
+    }
+    @media (max-width: 620px){
+      header{flex-direction:column}
+      .right{justify-content:flex-start}
+      .card{grid-column: span 12;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>fojadrachi.com</h1>
+          <div class="sub">Service-Übersicht — klick auf eine Karte, um die Subdomain zu öffnen.</div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="pill" title="Status ist nur optisch (kein Live-Check).">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Online</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="search">
+      <input id="q" type="text" placeholder="Suchen… (z. B. panel, pterodactyl, nextcloud, mc)" autocomplete="off" />
+      <button class="btn" id="reset" type="button">Reset</button>
+    </div>
+
+    <section class="grid" id="grid">
+
+      <!-- ✅ Passe hier nur die URL + Texte an -->
+      <article class="card" data-name="amp panel control" data-url="https://panel.fojadrachi.com">
+        <div class="top">
+          <div>
+            <h3 class="name">AMP Panel</h3>
+            <p class="desc">Gameserver & Instanzen verwalten.</p>
+          </div>
+          <span class="tag panel">panel</span>
+        </div>
+        <div class="linkrow">
+          <a class="url" href="https://panel.fojadrachi.com">panel.fojadrachi.com</a>
+          <a class="go" href="https://panel.fojadrachi.com" aria-label="Öffnen">
+            Öffnen
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 7h7v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="card" data-name="status uptime monitoring" data-url="https://status.fojadrachi.com">
+        <div class="top">
+          <div>
+            <h3 class="name">Status</h3>
+            <p class="desc">Uptime / Monitoring / Wartungen.</p>
+          </div>
+          <span class="tag misc">status</span>
+        </div>
+        <div class="linkrow">
+          <a class="url" href="https://status.fojadrachi.com">status.fojadrachi.com</a>
+          <a class="go" href="https://status.fojadrachi.com">Öffnen
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 7h7v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="card" data-name="nextcloud cloud files" data-url="https://cloud.fojadrachi.com">
+        <div class="top">
+          <div>
+            <h3 class="name">Cloud</h3>
+            <p class="desc">Dateien, Shares, Sync (z. B. Nextcloud).</p>
+          </div>
+          <span class="tag admin">cloud</span>
+        </div>
+        <div class="linkrow">
+          <a class="url" href="https://cloud.fojadrachi.com">cloud.fojadrachi.com</a>
+          <a class="go" href="https://cloud.fojadrachi.com">Öffnen
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 7h7v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="card" data-name="minecraft mc server map dynmap" data-url="https://mc.fojadrachi.com">
+        <div class="top">
+          <div>
+            <h3 class="name">Minecraft</h3>
+            <p class="desc">MC-Server / Dynmap / Verwaltung.</p>
+          </div>
+          <span class="tag game">game</span>
+        </div>
+        <div class="linkrow">
+          <a class="url" href="https://mc.fojadrachi.com">mc.fojadrachi.com</a>
+          <a class="go" href="https://mc.fojadrachi.com">Öffnen
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 7h7v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="card" data-name="grafana dashboard metrics" data-url="https://grafana.fojadrachi.com">
+        <div class="top">
+          <div>
+            <h3 class="name">Grafana</h3>
+            <p class="desc">Dashboards, Metrics, Logs.</p>
+          </div>
+          <span class="tag misc">metrics</span>
+        </div>
+        <div class="linkrow">
+          <a class="url" href="https://grafana.fojadrachi.com">grafana.fojadrachi.com</a>
+          <a class="go" href="https://grafana.fojadrachi.com">Öffnen
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 7h7v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="card" data-name="support docs wiki" data-url="https://docs.fojadrachi.com">
+        <div class="top">
+          <div>
+            <h3 class="name">Docs</h3>
+            <p class="desc">Doku, How-Tos, Linksammlung.</p>
+          </div>
+          <span class="tag admin">docs</span>
+        </div>
+        <div class="linkrow">
+          <a class="url" href="https://docs.fojadrachi.com">docs.fojadrachi.com</a>
+          <a class="go" href="https://docs.fojadrachi.com">Öffnen
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 7h7v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> fojadrachi.com</div>
+      <div>Tip: Du kannst die Karten oben im HTML einfach kopieren/ändern.</div>
+    </footer>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Click anywhere on card -> open
+    document.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("click", (e) => {
+        const url = card.getAttribute("data-url");
+        // Wenn man direkt auf einen Link klickt, nicht doppelt öffnen
+        const isLink = e.target.closest("a");
+        if (!isLink && url) window.location.href = url;
+      });
+    });
+
+    // Search filter
+    const q = document.getElementById("q");
+    const reset = document.getElementById("reset");
+    const cards = [...document.querySelectorAll(".card")];
+
+    function applyFilter() {
+      const term = (q.value || "").trim().toLowerCase();
+      cards.forEach(c => {
+        const hay = (c.getAttribute("data-name") || "").toLowerCase()
+                  + " " + (c.getAttribute("data-url") || "").toLowerCase()
+                  + " " + (c.innerText || "").toLowerCase();
+        c.style.display = (!term || hay.includes(term)) ? "" : "none";
+      });
+    }
+
+    q.addEventListener("input", applyFilter);
+    reset.addEventListener("click", () => { q.value=""; applyFilter(); q.focus(); });
+  </script>
+</body>
+</html>
